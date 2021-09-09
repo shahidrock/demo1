@@ -1,14 +1,25 @@
 package com.example.demo1.Student;
 
-import java.util.Arrays;
 import java.util.List;
 
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class StudentService {
+	
+	@Autowired
+	StudentRepository studentRepository;
+	
 	public List<Student> getStudents() {
-		return Arrays.asList(new Student(1L, "john Doe"));
+		return studentRepository.findAll();
+	}
+	
+	public void addNewStudent(Student student) {
+		studentRepository.save(student);
+	}
+	
+	public void deleteStudent(Long id) {		
+		studentRepository.deleteById(id);
 	}
 }
